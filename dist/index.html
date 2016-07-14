@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aurelia Navigation Skeleton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <!-- imported CSS are concatenated and added automatically -->
+  <link href="styles.css" rel="stylesheet"></head>
+  <body>
+    <div id=“fb-root”></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1078560385532336',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk/debug.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    <div class="splash">
+      <div class="message">Aurelia Navigation Skeleton</div>
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
+    
+    <!-- Webpack Dev Server reload -->
+    <script src="/webpack-dev-server.js"></script>
+    
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
+  <script type="text/javascript" src="aurelia-bootstrap.bundle.js"></script><script type="text/javascript" src="aurelia.bundle.js"></script><script type="text/javascript" src="app.bundle.js"></script></body>
+</html>
