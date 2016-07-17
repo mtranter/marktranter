@@ -1,0 +1,20 @@
+<template>
+    <require from="./../text-box.html"></require>
+    <require from="./../block-button.html"></require>
+    <form class="validate-form">
+        <div class="row">
+            <text-box value.two-way="newSkill.skillName" label="Name"></text-box>
+            <text-box value.two-way="newSkill.score" label="Level"></text-box>
+        </div>
+        <div class="row">
+            <block-button text="Add" click.call="addSkill(newSkill)"></block-button>
+            <block-button text="Cancel" click.call="cancel()"></block-button>
+        </div>
+    </form>
+    <ul>
+        <li repeat.for="skill of skills">
+            <h4>${skill.skillName}</h4><p>${skill.score}</p>
+        </li>
+    </ul>
+
+</template>

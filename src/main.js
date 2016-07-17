@@ -1,5 +1,7 @@
 import {bootstrap} from 'aurelia-bootstrapper-webpack';
 import 'bootstrap';
+import {Credentials} from './aws.js';
+import storage from './storage.js'
 
 bootstrap(async (aurelia) => {
   aurelia.use
@@ -12,6 +14,9 @@ bootstrap(async (aurelia) => {
 
   //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
   // aurelia.use.plugin('aurelia-html-import-template-loader')
+
+  var token = new storage().get("authToken");
+  await Credentials.initialise(token);
 
   const rootElement = document.getElementById("app-root");
   rootElement.setAttribute('aurelia-app', '');

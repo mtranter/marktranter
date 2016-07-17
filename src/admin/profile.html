@@ -1,0 +1,16 @@
+<template>
+    <require from="./../text-box.html"></require>
+    <require from="./../text-area.html"></require>
+    <require from="./../block-button.html"></require>
+    <form class="validate-form">
+        
+        <div class="row">
+            <text-box css-class="ct-name" value.two-way="profile.name" label="Name" required="true"></text-box>
+            <text-box css-class="ct-title" value.two-way="profile.title" label="Title" required="true"></text-box>
+            <text-area css-class="ct-blurb" rows="6" value.two-way="profile.blurb" label="Blurb" required="true"></text-area>
+        </div>
+        <div class="row">
+            <block-button text="Save" click.call="save(profile)"></block-button>
+        </div>
+    </form>
+</template>

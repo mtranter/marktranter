@@ -1,0 +1,6 @@
+<template bindable="name, label, required, value, cssClass, rows">
+    <require from="./form-group.html"></require>
+    <form-group>
+        <textarea class="form-control ${cssClass}" rows.bind="rows" name.bind="name" id.bind="name" placeholder.bind="label" required.bind="required" value.bind="value" type="text"></textarea>
+    </form-group>
+</template>

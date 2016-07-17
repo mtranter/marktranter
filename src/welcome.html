@@ -1,20 +1,81 @@
 <template>
-  <section class="au-animate">
-    <h2>${heading}</h2>
-    <form role="form" submit.delegate="submit()">
-      <div class="form-group">
-        <label for="fn">First Name</label>
-        <input type="text" value.bind="firstName" class="form-control" id="fn" placeholder="first name">
-      </div>
-      <div class="form-group">
-        <label for="ln">Last Name</label>
-        <input type="text" value.bind="lastName" class="form-control" id="ln" placeholder="last name">
-      </div>
-      <div class="form-group">
-        <label>Full Name</label>
-        <p class="help-block">${fullName | upper}</p>
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-  </section>
+<header>
+      <require from="./../styles/mywall.min.css" as="scoped"></require>
+  <require from="./../styles/light.css" as="scoped"></require>
+		<!-- Menu Navigation -->
+		<div id="top" class="container">
+			<!-- Menu left -->
+			<nav id="ha-header" class="left-nav ha-header">
+				<ul class="nav">
+			      <li class="dropdown">
+			      	<!-- Dropdown menu -->
+			        <a class="dropdown-toggle circle-main" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">        
+						<svg class="hello" height="36" viewBox="0 0 24 24" width="36" xmlns="http://www.w3.org/2000/svg">
+						    <path d="M2 15.5v2h20v-2H2zm0-5v2h20v-2H2zm0-5v2h20v-2H2z"/>
+						    <path d="M0 0h24v24H0z" fill="none"/>
+						</svg>
+			        </a>
+			        <!-- Navigation Sections -->
+			        <ul class="dropdown-menu">
+						<li><a data-scroll data-options='{ "easing": "easeOutQuint" }' href="#top" class="menu-item wall">Hello</a></li>
+						<li><a data-scroll data-options='{ "easing": "easeOutQuint" }' href="#about" class="menu-item wall">About Me</a></li>
+						<li><a data-scroll data-options='{ "easing": "easeOutQuint" }' href="#skills" class="menu-item wall">Skills and Abilities</a></li>
+						<li><a data-scroll data-options='{ "easing": "easeOutQuint" }' href="#education" class="menu-item wall">Education</a></li>
+						<li><a data-scroll data-options='{ "easing": "easeOutQuint" }' href="#work" class="menu-item wall">Work Experience</a></li>
+						<li><a data-scroll data-options='{ "easing": "easeOutQuint" }' href="#portfolio" class="menu-item wall">Portfolio</a></li>
+						<li><a data-scroll data-options='{ "easing": "easeOutQuint" }' href="#download" class="menu-item wall">Social Networks</a></li>
+						<li><a data-scroll data-options='{ "easing": "easeOutQuint" }' href="#contacto" class="menu-item wall">Contact Me</a></li>
+			        </ul>
+			      </li>
+			    </ul>
+			</nav>
+			<!-- // Menu left -->
+
+			<!-- Menu right - Hidden in small devices -->
+			<div class="nav-extra hidden-xs">
+				<!-- Button Contact Modal -->
+				<a class="callme" href="#" data-toggle="modal" data-target="#callmeModal">
+					<span class="glyphicon glyphicon glyphicon-earphone call" aria-hidden="true"></span>
+				</a>
+				<!-- Button 'Hire me' -->
+				<a class="hireme button-mywall" data-scroll data-options='{ "easing": "easeOutQuint" }' href="#contacto">Hire me now</a>
+			</div>
+			<!-- // Menu right -->
+		</div>
+		<!-- // Menu Navigation -->
+
+		<!-- Personal Details -->
+		<div class="container">
+			<img class="img-circle imgsus" alt="Andrey Marin" src="/img/marktranter_300.jpg"/>
+			<h1 class="name-boss">${profile.name}</h1>
+			<h2 class="main-details">${profile.title}</h2>
+			<p class="extend-details">${profile.blurb}</p>
+		</div>
+		<!-- // Personal Details -->
+	</header>
+  	<!-- Skills and abilities -->
+	<section id="skills" class="full-section-two bg-skills">
+		<div class="container">
+			<!-- Text Skills and Abilities -->
+			<h2 class="title-main mywhite">Skills &#38; Abilities.</h2>
+			<p class="text-main mywhite">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			
+			<div class="row">
+				<!-- Skills percent 1 -->
+				<div class="col-md-6 separ" repeat.for="skill of skills">
+					<div class="row">
+						<div class="hidden-xs col-sm-2 icon-skill"><img class="img-skill" alt="html 5" src="/img/w_html5.png"/></div>
+						<div class="col-sm-10">
+							<div class="row">
+								<div class="col-sm-12 title-skill">${skill.skillName}</div>
+								<div class="col-sm-12 bar-skill">
+									<div class="this-skill my-red my-ninety"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </template>
