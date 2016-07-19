@@ -48,6 +48,7 @@
 		<div class="container">
 			<img class="img-circle imgsus" alt="Andrey Marin" src="/img/marktranter_300.jpg"/>
 			<h1 class="name-boss">${profile.name}</h1>
+			<i class="fa fa-language" data-unicode="f1ab"></i>
 			<h2 class="main-details">${profile.title}</h2>
 			<p class="extend-details">${profile.blurb}</p>
 		</div>
@@ -64,12 +65,12 @@
 				<!-- Skills percent 1 -->
 				<div class="col-md-6 separ" repeat.for="skill of skills">
 					<div class="row">
-						<div class="hidden-xs col-sm-2 icon-skill"><img class="img-skill" alt="html 5" src="/img/w_html5.png"/></div>
+
 						<div class="col-sm-10">
 							<div class="row">
 								<div class="col-sm-12 title-skill">${skill.skillName}</div>
 								<div class="col-sm-12 bar-skill">
-									<div class="this-skill my-red my-ninety"></div>
+									<div class="this-skill ${$even ? 'my-black' : 'my-red'} my-ninety"></div>
 								</div>
 							</div>
 						</div>

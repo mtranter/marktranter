@@ -1,12 +1,15 @@
 import {inject} from 'aurelia-framework'
 import {CvRepository} from './../repository.js'
+import faExplorer from './fa-explorer.js'
 
-@inject(CvRepository)
+@inject(CvRepository, faExplorer)
 export class Skills{
     skills = [];
+    currentIcon = "fa-search";
     newSkill = {};
-    constructor(repo){
+    constructor(repo, faExplorer){
         this.repo = repo
+        this.faExplorer = faExplorer;
     }
     async addSkill(skill) {
         await this.repo.addSkill(skill);
@@ -17,5 +20,6 @@ export class Skills{
     }
     async activate(){
         this.skills = await this.repo.getSkills();
+        this.iconClasses = this.faExplorer.getFaClasses();
     }
 }

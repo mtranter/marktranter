@@ -1,11 +1,17 @@
 import {inject} from 'aurelia-framework'
 import {Redirect} from 'aurelia-router';
-import AuthService from './authentication.js'
+import {AuthService} from './aws.js'
 import config from './appConfig.js'
 import storage from './storage.js'
 
+
+@inject(AuthService)
 export class App {
-  configureRouter(config, router) {
+  constructor(authService){
+    this.authService = authService;
+  }
+  async configureRouter(config, router) {
+    await this.authService.authorizeAdminWithFallback();
     config.title = 'Mark Tranter';
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
@@ -15,6 +21,9 @@ export class App {
     ]);
 
     this.router = router;
+  }
+  canActivate(){
+    console.log("in can activate");
   }
 }
 
@@ -28,26 +37,9 @@ class AuthorizeStep {
 
   run(navigationInstruction, next) {
     if (navigationInstruction.getAllInstructions().some(i => i.config.settings.roles && i.config.settings.roles.indexOf('admin') !== -1)) {
-      const cancel = function(){return next.cancel(new Redirect('login')); }
-      var token = this.storage.get('authToken');
-      if(token){
-        var creds = new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: config.identityPoolId,
-            Logins:{
-                "graph.facebook.com": token
-            },
-            RoleArn: this.requiredRole
-        });
-        creds.get(function(){
-          if(!creds.expired){
-              AWS.config.credentials = creds;
-              next();
-          }else{
-            return cancel();
-          }
-        });
-      }else{
-        return cancel();
+      const cancel = function(){return next.cancel(new Redirect('login?redirect=' + navigationInstruction.fragment)); }
+      if(!this.authService.isAdmin){
+        return this.authService.authorizeAdmin().then(next).catch(cancel);
       }
     }
     return next();

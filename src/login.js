@@ -1,14 +1,23 @@
-import AuthService from './authentication';
+import {AuthService} from './aws';
 import {inject} from 'aurelia-framework';
-@inject(AuthService)
+import {Router} from 'aurelia-router';
+
+@inject(AuthService, Router)
 export class Login{
-	constructor(auth){
-		this.auth = auth;   
+	redirectUrl = ''
+	constructor(auth, router){
+		this.auth = auth; 
+		this.router = router;  
 	};
 
 	heading = 'Login';
 
 	async login(){
-        	await this.auth.adminLogin();
+        	await this.auth.loginAdmin();
+			this.router.navigate(this.redirectUrl);
+	}
+
+	activate(params){
+		this.redirectUrl = params.redirect || '';
 	}
 }

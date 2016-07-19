@@ -1,7 +1,9 @@
 import {bootstrap} from 'aurelia-bootstrapper-webpack';
 import 'bootstrap';
-import {Credentials} from './aws.js';
+import {Credentials, DynamoDb} from './aws.js';
+import {CvRepository, Repository} from './repository'
 import storage from './storage.js'
+import {AuthProvider, FbAuthProvider} from './auth-provider.js'
 
 bootstrap(async (aurelia) => {
   aurelia.use
@@ -12,12 +14,10 @@ bootstrap(async (aurelia) => {
   // aurelia.use.plugin('aurelia-animator-css');
   //if the css animator is enabled, add swap-order="after" to all router-view elements
 
-  //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
-  // aurelia.use.plugin('aurelia-html-import-template-loader')
-
-  var token = new storage().get("authToken");
-  await Credentials.initialise(token);
-
+  aurelia.container.registerSingleton(AuthProvider, FbAuthProvider)
+  aurelia.container.registerHandler(DynamoDb, () => new AWS.DynamoDB());
+  aurelia.container.registerTransient(Repository);
+  aurelia.container.registerTransient(CvRepository);
   const rootElement = document.getElementById("app-root");
   rootElement.setAttribute('aurelia-app', '');
 

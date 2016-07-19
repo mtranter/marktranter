@@ -1,0 +1,22 @@
+<template>
+    <form class="validate-form">
+        <div class="row">
+            <text-box value.two-way="newSkill.skillName" label="Name"></text-box>
+            <text-box value.two-way="newSkill.score" label="Level"></text-box>
+
+        <div class="btn-group">
+        <a class="btn" href="#"><i class="fa ${currentIcon} fa-fw"></i> Icon</a>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li repeat.for="icon of iconClasses"><a><i class="fa ${icon} fa-fw"></i> ${icon}</a></li>
+        </ul>
+        </div>
+        </div>  
+        <div class="row">
+            <block-button text="Add" click.call="addSkill(newSkill)"></block-button>
+            <block-button text="Cancel" click.call="cancel()"></block-button>
+        </div>
+    </form>
+</template>

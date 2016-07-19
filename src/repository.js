@@ -3,7 +3,7 @@ import {DynamoDb} from './aws.js'
 import config from './appConfig.js'
 
 @inject(DynamoDb)
-class Repository {
+export class Repository {
     constructor(dynamoDb){
         this.dynamoDb = dynamoDb;
     }
