@@ -33,6 +33,11 @@ export class AuthService{
     loginAdmin(){
         return this.authProvider.login().then(this._authorizeTokenAsAdmin.bind(this)).then(this._setCreds.bind(this));
     }
+    refresh(){
+        return new Promise((resolve, reject) => {
+            AWS.config.credentials.refresh(resolve);
+        });
+    }
     get isAdmin(){
         return this.adminCreds != null && !this.adminCreds.expired;
     }

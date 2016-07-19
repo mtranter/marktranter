@@ -13,11 +13,13 @@ export class App {
   async configureRouter(config, router) {
     await this.authService.authorizeAdminWithFallback();
     config.title = 'Mark Tranter';
+    config.options.pushState = true;
+    config.options.hashChange = false;
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
-      { route: ['', 'welcome'], name: 'welcome',      moduleId: './welcome',      nav: true, title: 'Welcome' },
+      { route: ['', 'home'], name: 'home',      moduleId: './welcome',      nav: true, title: 'Home' },
       { route: 'login',         name: 'login',        moduleId: './login',        nav: true, title: 'Login' },
-      { route: 'admin',  name: 'admin', moduleId: './admin/index', nav: true, title: '', settings: { roles: ['admin'] } }
+      { route: 'admin',  name: 'admin', moduleId: './admin/index', nav: true, title: 'Admin', settings: { roles: ['admin'] } }
     ]);
 
     this.router = router;
@@ -35,7 +37,8 @@ class AuthorizeStep {
     this.storage = storage;
   }
 
-  run(navigationInstruction, next) {
+  async run(navigationInstruction, next) {
+    await this.authService.refresh();
     if (navigationInstruction.getAllInstructions().some(i => i.config.settings.roles && i.config.settings.roles.indexOf('admin') !== -1)) {
       const cancel = function(){return next.cancel(new Redirect('login?redirect=' + navigationInstruction.fragment)); }
       if(!this.authService.isAdmin){

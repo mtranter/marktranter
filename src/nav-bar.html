@@ -1,0 +1,38 @@
+<template bindable="router">
+    <!-- Menu Navigation -->
+		<div id="top" class="container">
+			<!-- Menu left -->
+			<nav id="ha-header" class="left-nav ha-header">
+				<ul class="nav">
+			      <li class="dropdown">
+			      	<!-- Dropdown menu -->
+			        <a class="dropdown-toggle circle-main" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">        
+						<svg class="hello" height="36" viewBox="0 0 24 24" width="36" xmlns="http://www.w3.org/2000/svg">
+						    <path d="M2 15.5v2h20v-2H2zm0-5v2h20v-2H2zm0-5v2h20v-2H2z"/>
+						    <path d="M0 0h24v24H0z" fill="none"/>
+						</svg>
+			        </a>
+			        <!-- Navigation Sections -->
+			        <ul class="dropdown-menu">
+                         <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+                            <a class="menu-item wall" href.bind="row.href">${row.title}</a>
+                        </li>
+			        </ul>
+			      </li>
+			    </ul>
+			</nav>
+			<!-- // Menu left -->
+
+			<!-- Menu right - Hidden in small devices -->
+			<div class="nav-extra hidden-xs">
+				<!-- Button Contact Modal -->
+				<a class="callme" href="#" data-toggle="modal" data-target="#callmeModal">
+					<span class="glyphicon glyphicon glyphicon-earphone call" aria-hidden="true"></span>
+				</a>
+				<!-- Button 'Hire me' -->
+				<a class="hireme button-mywall" data-scroll data-options='{ "easing": "easeOutQuint" }' href="#contacto">Hire me now</a>
+			</div>
+			<!-- // Menu right -->
+		</div>
+		<!-- // Menu Navigation -->
+</template>
